@@ -31,14 +31,17 @@ A project on making the 3-tier web architecture which connects in the stream of 
 * **Amazon Simple Storage Service (Amazon S3):** S3 is an object storage service that store and retrieve any amount of data at any time. App tier and web tier configuration data is stored in S3 bucket.
 
 * **Amazon Virtual Private Cloud (VPC):** VPC is a private cloud computing environment contained within a public cloud. It is a service that allows its users to launch their virtual machines in a protected as well as isolated virtual environment for three tier architecture.
+* 
 * **Amazon Relational Database Service (Amazon RDS):** RDS is a web service that makes it easier to set up, operate, and scale a relational database in the AWS Cloud. Aurora database is created with Aurora replica to store and access data.
 
 # PROJECT EXECUTION STEPS
 ## STEP 1: INITIAL SETUP
 **a)	Download code from GitHub:**
 * Using git clone https://github.com/aws-samples/aws-three-tier-web-architecture-workshop.git, download the required files to the local drive.
+* 
 **b)	Creation of S3 bucket:**
 * Creating S3 bucket with ACL disabled and public access blocked to store the downloaded files in it.
+* 
 **c)	Creation of IAM role for EC2 Instance:**
 * Create a role for EC2 with policies allowing access to SSM managed instance core and S3 read only.
 
