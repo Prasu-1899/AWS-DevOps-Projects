@@ -1,0 +1,41 @@
+- name: Build & Deploy Docker Container
+  hosts: dockerservers
+  gather_facts: fasle
+  remote_user: root
+  tasks:
+    - name: Copy the files to remote user
+      become: yes
+      copy:
+        src: /var/lib/jenkins/workspace/ansible-jenkins-pipeline
+        des: ~/project
+
+
+
+
+
+- hosts: dockerservers
+  remote_user: root
+  become: yes
+  tasks:
+  - name: Copy the files to remote user
+    ansible.builtin.copy:
+      src: /var/lib/jenkins/workspace/ansible-jenkins-pipeline/
+      dest: /project
+      remote_src: yes
+      mode: '0644'
+  - name: Building Docker image
+    docker_image:
+      name: mico:latest
+      source: build
+      build: 
+        path: ~/project
+      state: present
+  - name: Creating Container
+    docker_container:
+      name: micro-container
+      image: micro:latest
+      ports:
+        - "80:80"
+      state: started
+
+      shell: scp -r /var/lib/jenkins/workspace/ansible-jenkins-pipeline/* root@47.129.7.244:~/project
