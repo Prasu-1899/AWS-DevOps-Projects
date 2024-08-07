@@ -1,0 +1,15 @@
+
+# To connect with service pod
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mypod
+  labels:
+    app: webapps
+spec:
+  containers:
+  - name: mycon
+    image: httpd
+    ports:
+    - containerPort: 80
