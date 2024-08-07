@@ -1,0 +1,15 @@
+- hosts: localhost
+  remote_user: ec2-user
+  become: yes
+  tasks: 
+  - name: Creating EC2 
+    ec2:
+      aws_access_key: AKIAZ75DHBTCXV2AAVH4 
+      aws_secret_key: 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
+      key_name: puttyblr
+      instance_type: t2.micro
+      image: ami-04f73ca9a4310089f 
+      region: "ap-southeast-1"
+      count: 1
+      vpc_subnet_id: subnet-0e4a19c818a965933
+      assign_public_ip: yes 
