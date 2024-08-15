@@ -1,0 +1,35 @@
+stages:          
+  - compile
+  - sonarqube-analysis
+  - build
+  - deploy
+
+compile-job:      
+  stage: compile
+  tags:
+    - "self-hosted"
+  script:
+    - echo "Compiling the code..."
+    - mvn clean compile
+
+sonarqube-job:  
+  stage: sonarqube-analysis    
+  script:
+    - echo "Running Sonarqube Analysis"
+    - mvn sonar:sonar -Dsonar.host.url=http://47.128.228.94:9000/ -Dsonar.login=squ_fb5682db92ff8ad75d105fc960e1c282a1e8d813 -Dsonar.projectKey=Petclinic -Dsonar.projectName=Petclinic -Dsonar.java.binaries=.
+
+build-job:   
+  stage: build
+  tags:
+    - "self-hosted"    
+  script:
+    - echo "Maven Build"
+    - mvn clean package
+
+deploy-job:      
+  stage: deploy
+  tags:
+    - "self-hosted"  
+  script:
+    - echo "Deploying application..."
+    - docker run -p 8080:80 nginx
